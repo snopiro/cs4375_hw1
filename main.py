@@ -9,31 +9,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import SGDRegressor
 from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import fetch_california_housing
 
+# Grab data from source
+data_training = pd.read_csv('https://personal.utdallas.edu/~cwk200000/files/auto-mpg-training.csv')
+data_test = pd.read_csv('https://personal.utdallas.edu/~cwk200000/files/auto-mpg-test.csv')
 
-california_housing = fetch_california_housing(as_frame=True)
+print(data_training)
+print(data_test)
 
-
-california_housing.frame.hist(figsize=(12, 10), bins=30, edgecolor="black")
-plt.subplots_adjust(hspace=0.7, wspace=0.4)
-
-df = california_housing.frame
-# X = df.drop(['MedHouseVal', 'Latitude', 'Longitude', 'Population'], axis = 1)
-
-# print(df)
-
-# print(X)
-
-# M = df.corr()
-# print(M)
-
-X = df[['MedInc', 'HouseAge', 'AveRooms']]
-Y = df[['MedHouseVal']]
-print(X)
-
-model = LinearRegression().fit(X, Y)
-print(model.coef_)
-print(model.intercept_)
-
-#y =  .02 + .443 * MedInc + .017 * HouseAge - .027 * AveRooms
