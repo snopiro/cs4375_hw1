@@ -2,6 +2,9 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
+##################################################
+# Initial variable setup
+##################################################
 # Grab data from source
 data_training = pd.read_csv('https://personal.utdallas.edu/~cwk200000/files/auto-mpg-training.csv')
 data_test = pd.read_csv('https://personal.utdallas.edu/~cwk200000/files/auto-mpg-test.csv')
@@ -11,6 +14,10 @@ X_train = data_training.drop('mpg', axis=1)
 y_train = data_training['mpg']
 X_test = data_test.drop('mpg', axis=1)
 y_test = data_test['mpg']
+
+##################################################
+# Function definitions
+##################################################
 
 def run_linear_regression():
     # Create a linear regression model
@@ -40,6 +47,10 @@ def run_linear_regression():
     log_file.write(log_entry)
 
     log_file.close()
+
+##################################################
+# Main Function
+##################################################
 
 if __name__ == '__main__':
     run_linear_regression()
