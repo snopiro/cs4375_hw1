@@ -94,7 +94,7 @@ def plot_results(results):
     plt.grid(True, which="both", ls="--", c='0.7')
     plt.show()
 
-        # Visualization for R^2 against Learning Rate
+    # Visualization for R^2 against Learning Rate
     grouped = results.groupby('learn_rate').mean()
     plt.figure(figsize=(10, 6))
     plt.plot(grouped.index, grouped['r2_train'], marker='o', label='R^2 Train')
