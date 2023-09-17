@@ -27,8 +27,9 @@ log_file = open('grad_descent_part_2.log', 'w')
 # Evaluate the model using Mean Squared Error (MSE)
 mse_train = mean_squared_error(y_train, y_pred_train)
 mse_test = mean_squared_error(y_test, y_pred_test)
-log_entry = (f"Weights: {model.coef_}\n"
-             f"Training MSE: {mse_train}, Test MSE: {mse_test}\n\n")
+log_entry = ("--- Scikit Linear Regression ---\n"
+             f"Weights: {model.coef_}\n"
+             f"Training MSE: {mse_train}, Test MSE: {mse_test}")
 log_file.write(log_entry)
 
 log_file.close()
