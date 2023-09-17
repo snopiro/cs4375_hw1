@@ -4,7 +4,7 @@ GitHub Repo: https://github.com/snopiro/cs4375_hw1
 ## Project Description
 There are several ways you can run this project. I have provided docker files to provide an execution environment if you have Docker installed. Alternatively, you can also set up a Github Codespaces environment and run the docker files from there. You can also run the project locally if you have python installed on your machine.
 
-After running the project, it will create log files and plots in the files directory.
+After running the project, it will create log files and plots in the src/files directory.
 
 ## Docker
 If you would like to use Docker on your local machine, install Docker desktop and run the following command in the root directory of this project, where the docker-compose.yml file is located:
