@@ -66,7 +66,7 @@ def plot_results(results):
     plt.xscale('log')
     plt.legend()
     plt.grid(True, which="both", ls="--", c='0.7')
-    plt.show()
+    plt.savefig('files/mse_lr.png')
 
     # Visualization for MSE against Number of Iterations
     grouped_iter = results.groupby('n_iter').mean()
@@ -79,7 +79,7 @@ def plot_results(results):
     plt.xscale('log')
     plt.legend()
     plt.grid(True, which="both", ls="--", c='0.7')
-    plt.show()
+    plt.savefig('files/mse_iter.png')
     
     # Visualization for MSE against Tolerance
     grouped_tol = results.groupby('tolerance').mean()
@@ -92,7 +92,7 @@ def plot_results(results):
     plt.xscale('log')
     plt.legend()
     plt.grid(True, which="both", ls="--", c='0.7')
-    plt.show()
+    plt.savefig('files/mse_tol.png')
 
     # Visualization for R^2 against Learning Rate
     grouped = results.groupby('learn_rate').mean()
@@ -105,7 +105,7 @@ def plot_results(results):
     plt.xscale('log')
     plt.legend()
     plt.grid(True, which="both", ls="--", c='0.7')
-    plt.show()
+    plt.savefig('files/r2_lr.png')
 
     # Visualization for R^2 against Number of Iterations
     grouped_iter = results.groupby('n_iter').mean()
@@ -118,7 +118,7 @@ def plot_results(results):
     plt.xscale('log')
     plt.legend()
     plt.grid(True, which="both", ls="--", c='0.7')
-    plt.show()
+    plt.savefig('files/r2_iter.png')
     
     # Visualization for R^2 against Tolerance
     grouped_tol = results.groupby('tolerance').mean()
@@ -131,11 +131,11 @@ def plot_results(results):
     plt.xscale('log')
     plt.legend()
     plt.grid(True, which="both", ls="--", c='0.7')
-    plt.show()
+    plt.savefig('files/r2_tol.png')
 
 def run_linear_regression(num_runs=1):
 
-    log_file = open('grad_descent_part_1.log', 'w')
+    log_file = open('files/grad_descent_part_1.log', 'w')
     results = []
     # Parameters for gradient descent
     learn_rate = [0.01, 0.001, 0.0001]

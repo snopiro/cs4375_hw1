@@ -23,7 +23,7 @@ def run_linear_regression():
     y_pred_train = model.predict(X_train)
     y_pred_test = model.predict(X_test)
 
-    log_file = open('grad_descent_part_2.log', 'w')
+    log_file = open('files/grad_descent_part_2.log', 'w')
 
     # Evaluate the model using Mean Squared Error (MSE)
     mse_train = mean_squared_error(y_train, y_pred_train)
