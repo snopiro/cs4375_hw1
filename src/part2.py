@@ -28,10 +28,15 @@ def run_linear_regression():
     # Evaluate the model using Mean Squared Error (MSE)
     mse_train = mean_squared_error(y_train, y_pred_train)
     mse_test = mean_squared_error(y_test, y_pred_test)
+    r2_train = model.score(X_train, y_train)
+    r2_test = model.score(X_test, y_test)
+
     log_entry = ("--- Scikit Linear Regression ---\n"
                 f"Weights: {model.coef_}\n"
                 f"Training MSE: {mse_train}\n"
-                f"Test MSE: {mse_test}\n\n")
+                f"Test MSE: {mse_test}\n"
+                f"Training R^2: {r2_train}\n"
+                f"Test R^2: {r2_test}\n\n")
     log_file.write(log_entry)
 
     log_file.close()
