@@ -12,24 +12,29 @@ y_train = data_training['mpg']
 X_test = data_test.drop('mpg', axis=1)
 y_test = data_test['mpg']
 
-# Create a linear regression model
-model = LinearRegression()
+def run_linear_regression():
+    # Create a linear regression model
+    model = LinearRegression()
 
-# Fit the model to the training data
-model.fit(X_train, y_train)
+    # Fit the model to the training data
+    model.fit(X_train, y_train)
 
-# Predict on the sets
-y_pred_train = model.predict(X_train)
-y_pred_test = model.predict(X_test)
+    # Predict on the sets
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
 
-log_file = open('grad_descent_part_2.log', 'w')
+    log_file = open('grad_descent_part_2.log', 'w')
 
-# Evaluate the model using Mean Squared Error (MSE)
-mse_train = mean_squared_error(y_train, y_pred_train)
-mse_test = mean_squared_error(y_test, y_pred_test)
-log_entry = ("--- Scikit Linear Regression ---\n"
-             f"Weights: {model.coef_}\n"
-             f"Training MSE: {mse_train}, Test MSE: {mse_test}")
-log_file.write(log_entry)
+    # Evaluate the model using Mean Squared Error (MSE)
+    mse_train = mean_squared_error(y_train, y_pred_train)
+    mse_test = mean_squared_error(y_test, y_pred_test)
+    log_entry = ("--- Scikit Linear Regression ---\n"
+                f"Weights: {model.coef_}\n"
+                f"Training MSE: {mse_train}\n"
+                f"Test MSE: {mse_test}\n\n")
+    log_file.write(log_entry)
 
-log_file.close()
+    log_file.close()
+
+if __name__ == '__main__':
+    run_linear_regression()

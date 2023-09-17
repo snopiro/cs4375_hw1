@@ -41,26 +41,41 @@ def gradient_descent(gradient, start, learn_rate, n_iter=100, tolerance=1e-3):
         vector += diff
     return vector
 
-log_file = open('grad_descent_part_1.log', 'w')
+def run_linear_regression(num_runs=1):
+    log_file = open('grad_descent_part_1.log', 'w')
 
-# Parameters for gradient descent
-learn_rate = 0.01
-n_iter = 1000
-tolerance = 1e-5
+    # Parameters for gradient descent
+    learn_rate = [0.01, 0.001, 0.0001]
+    n_iter = [10, 100, 1000]
+    tolerance = [1e-3, 1e-4, 1e-5]
 
-# Use gradient descent to find optimal weights
-optimal_weights_training = gradient_descent(
-    gradient=lambda w: mse_gradient(w, X_train_bias, y_train),
-    start=np.random.randn(X_train_bias.shape[1]),
-    learn_rate=learn_rate,
-    n_iter=n_iter,
-    tolerance=tolerance
-)
+    # Run the experiment 3 times with different initial weights
+    for _ in range(0, num_runs):
+        start = np.random.randn(X_train_bias.shape[1])
+        log_file.write(f"--- Initial Model ---\n"
+                        f"Weights: {start}\n\n"
+                        "--- Final Models ---\n")
 
-log_entry = ("--- Final Model ---\n"
-             f"Weights: {optimal_weights_training}\n"
-             f"Training MSE: {mse_cost(optimal_weights_training, X_train_bias, y_train)}\n"
-             f"Test MSE: {mse_cost(optimal_weights_training, X_test_bias, y_test)}\n")
-log_file.write(log_entry)
+        for l in learn_rate:    
+            for n in n_iter:
+                for t in tolerance:
 
-log_file.close()
+                    # Use gradient descent to find optimal weights
+                    optimal_weights_training = gradient_descent(
+                        gradient=lambda w: mse_gradient(w, X_train_bias, y_train),
+                        start=start,
+                        learn_rate=l,
+                        n_iter=n,
+                        tolerance=t
+                    )
+
+                    log_entry = (f"Learn Rate: {l}, Iterations: {n}, Tolerance: {t}\n"
+                                f"Weights: {optimal_weights_training}\n"
+                                f"Training MSE: {mse_cost(optimal_weights_training, X_train_bias, y_train)}\n"
+                                f"Test MSE: {mse_cost(optimal_weights_training, X_test_bias, y_test)}\n\n")
+                    log_file.write(log_entry)
+
+    log_file.close()
+
+if __name__ == '__main__':
+    run_linear_regression(3)
