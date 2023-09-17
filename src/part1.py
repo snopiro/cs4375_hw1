@@ -54,10 +54,89 @@ def gradient_descent(gradient, start, learn_rate, n_iter=100, tolerance=1e-3):
         vector += diff
     return vector
 
+def plot_results(results):
+    # Visualization for MSE against Learning Rate
+    grouped = results.groupby('learn_rate').mean()
+    plt.figure(figsize=(10, 6))
+    plt.plot(grouped.index, grouped['mse_train'], marker='o', label='MSE Train')
+    plt.plot(grouped.index, grouped['mse_test'], marker='o', label='MSE Test')
+    plt.title('MSE against Learning Rate')
+    plt.xlabel('Learning Rate')
+    plt.ylabel('MSE')
+    plt.xscale('log')
+    plt.legend()
+    plt.grid(True, which="both", ls="--", c='0.7')
+    plt.show()
+
+    # Visualization for MSE against Number of Iterations
+    grouped_iter = results.groupby('n_iter').mean()
+    plt.figure(figsize=(10, 6))
+    plt.plot(grouped_iter.index, grouped_iter['mse_train'], marker='o', label='MSE Train')
+    plt.plot(grouped_iter.index, grouped_iter['mse_test'], marker='o', label='MSE Test')
+    plt.title('MSE against Number of Iterations')
+    plt.xlabel('Number of Iterations')
+    plt.ylabel('MSE')
+    plt.xscale('log')
+    plt.legend()
+    plt.grid(True, which="both", ls="--", c='0.7')
+    plt.show()
+    
+    # Visualization for MSE against Tolerance
+    grouped_tol = results.groupby('tolerance').mean()
+    plt.figure(figsize=(10, 6))
+    plt.plot(grouped_tol.index, grouped_tol['mse_train'], marker='o', label='MSE Train')
+    plt.plot(grouped_tol.index, grouped_tol['mse_test'], marker='o', label='MSE Test')
+    plt.title('MSE against Tolerance')
+    plt.xlabel('Tolerance')
+    plt.ylabel('MSE')
+    plt.xscale('log')
+    plt.legend()
+    plt.grid(True, which="both", ls="--", c='0.7')
+    plt.show()
+
+        # Visualization for R^2 against Learning Rate
+    grouped = results.groupby('learn_rate').mean()
+    plt.figure(figsize=(10, 6))
+    plt.plot(grouped.index, grouped['r2_train'], marker='o', label='R^2 Train')
+    plt.plot(grouped.index, grouped['r2_test'], marker='o', label='R^2 Test')
+    plt.title('R^2 against Learning Rate')
+    plt.xlabel('Learning Rate')
+    plt.ylabel('R^2')
+    plt.xscale('log')
+    plt.legend()
+    plt.grid(True, which="both", ls="--", c='0.7')
+    plt.show()
+
+    # Visualization for R^2 against Number of Iterations
+    grouped_iter = results.groupby('n_iter').mean()
+    plt.figure(figsize=(10, 6))
+    plt.plot(grouped_iter.index, grouped_iter['r2_train'], marker='o', label='R^2 Train')
+    plt.plot(grouped_iter.index, grouped_iter['r2_test'], marker='o', label='R^2 Test')
+    plt.title('R^2 against Number of Iterations')
+    plt.xlabel('Number of Iterations')
+    plt.ylabel('R^2')
+    plt.xscale('log')
+    plt.legend()
+    plt.grid(True, which="both", ls="--", c='0.7')
+    plt.show()
+    
+    # Visualization for R^2 against Tolerance
+    grouped_tol = results.groupby('tolerance').mean()
+    plt.figure(figsize=(10, 6))
+    plt.plot(grouped_tol.index, grouped_tol['r2_train'], marker='o', label='R^2 Train')
+    plt.plot(grouped_tol.index, grouped_tol['r2_test'], marker='o', label='R^2 Test')
+    plt.title('R^2 against Tolerance')
+    plt.xlabel('Tolerance')
+    plt.ylabel('R^2')
+    plt.xscale('log')
+    plt.legend()
+    plt.grid(True, which="both", ls="--", c='0.7')
+    plt.show()
+
 def run_linear_regression(num_runs=1):
 
     log_file = open('grad_descent_part_1.log', 'w')
-
+    results = []
     # Parameters for gradient descent
     learn_rate = [0.01, 0.001, 0.0001]
     n_iter = [10, 100, 1000]
@@ -95,10 +174,22 @@ def run_linear_regression(num_runs=1):
                                 f"Training R^2: {r2_train}\n"
                                 f"Test R^2: {r2_test}\n\n")
                     log_file.write(log_entry)
+                    results.append({
+                        'learn_rate': l,
+                        'n_iter': n,
+                        'tolerance': t,
+                        'mse_train': mse_train,
+                        'mse_test': mse_test,
+                        'r2_train': r2_train,
+                        'r2_test': r2_test
+                    })
+    
     log_file.close()
+    return pd.DataFrame(results)
 
 ##################################################
 # Main Function
 ##################################################
 if __name__ == '__main__':
-    run_linear_regression(3)
+    results = run_linear_regression(3)
+    plot_results(results)
