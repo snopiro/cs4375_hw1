@@ -12,7 +12,7 @@ If you would like to use Docker on your local machine, install Docker desktop an
 docker compose up
 ```
 
-## Github Codespaces
+## Github Codespaces (Recommended)
 
 If you would like to use Github Codespaces, click the green button at the top of this repository that says "Code" and select "Create codespace on master". This will open a new Codespaces environment with the project already cloned. Once the environment is ready, navigate to the root directory of this project, where the docker-compose.yml file is located and run the following command in the terminal:
 ```
